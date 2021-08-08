@@ -12,7 +12,7 @@ module.exports = {
             const messages = args[0]
             if(!messages){
                 embed.setTitle(`Command: ${pfx}clear`)
-                embed.setDescription(`**Description:** Purge messsages\n**Usage:** ${pfx}clear [amount of messages \`1 - 99\`\n**Example:** ${pfx}clear 20`)
+                embed.setDescription(`**Description:** Purge messsages\n**Usage:** ${pfx}clear [amount of messages \`1 - 100\`\n**Example:** ${pfx}clear 20`)
                 embed.setColor("#ECBCD7")
                 embed.setTimestamp()
                 message.channel.send(embed);
@@ -28,16 +28,21 @@ module.exports = {
                     console.log('Embed sent');
                 }
                 else{
-                    if(parseInt(messages) > 99){
+                    if(parseInt(messages) > 100){
                         embed.setTitle('Error')
-                        embed.setDescription('You must choose an amount of messages between \`1\` and \`99\`')
+                        embed.setDescription('You must choose an amount of messages between \`1\` and \`100\`')
                         embed.setColor("#ECBCD7")
                         embed.setTimestamp()
                         message.channel.send(embed);
                         console.log('Embed sent');
                     }
                     else{
-                        embed.setAuthor(`Deleted ${messages} messages!`)
+                        if(messages === '1'){
+                            var msg = ('message')
+                        } else{
+                            var msg = ('messages')
+                        }
+                        embed.setAuthor(`Deleted ${messages} ${msg}!`)
                         embed.setDescription(`**Amount:** ${messages}\n**In:** <#${message.channel.id}>\n**By:** ${message.member}`)
                         embed.setColor("#ECBCD7")
                         embed.setTimestamp()
