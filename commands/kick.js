@@ -31,7 +31,7 @@ module.exports = {
                     embed.setColor("#ECBCD7")
                     embed.setTimestamp()
                     user.kick(reason);
-                    console.log(`Kicked ${target.tag}`)
+                    console.log(`Kicked ${target.tag} for ${reason}`)
                     message.channel.send(embed);
                     logs.send(embed);
                     console.log('Embed sent');

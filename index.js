@@ -7,7 +7,7 @@ client.commands = new Discord.Collection();
 //On ready
 client.on('ready', () => {
     console.log(client.user.tag + ' Has logged in!');
-    client.user.setActivity('to my master', { type: 'LISTENING' });
+    client.user.setActivity('my master', { type: 'LISTENING' });
 });
 
 //Config setup

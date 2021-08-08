@@ -36,7 +36,7 @@ module.exports = {
                             days: bandays,
                             reason: banreason
                         });
-                        console.log(`Banned ${target.tag}`)
+                        console.log(`Banned ${target.tag} for ${banreason}`)
                         message.channel.send(embed);
                         logs.send(embed);
                         console.log('Embed sent');
