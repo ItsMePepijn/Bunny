@@ -1,7 +1,7 @@
 const db = require('quick.db');
 const fs = require('fs');
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client({ partials: ['MESSAGE'] });
 client.commands = new Discord.Collection();
 
 //On ready
@@ -41,5 +41,18 @@ function MemberCount(){
     console.log('Updated membercount');
 }
 setInterval(MemberCount, 60000)
+
+//deleted message logger
+client.on('messageDelete', message => {
+    if(!message.partial){
+        const logs = client.channels.cache.find(channel => channel.id === '864535338977591326');
+        const embed = new Discord.MessageEmbed()
+        embed.setTitle('Deleted message:')
+        embed.setDescription(`**Messsage:** ${message.content}\n**Sent by:** ${message.author}\n**In:** <#${message.channel.id}>`)
+        embed.setColor('#ECBCD7')
+        embed.setTimestamp()
+        logs.send(embed)
+    }
+});
 
 client.login(token);
