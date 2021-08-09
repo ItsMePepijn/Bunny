@@ -9,6 +9,7 @@
   "author": "pep",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "canvas": "^2.8.0",
     "discord.js": "^12.5.3",
     "fs": "0.0.1-security",
