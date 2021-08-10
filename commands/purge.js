@@ -12,7 +12,7 @@ module.exports = {
             const messages = args[0]
             if(!messages){
                 embed.setTitle(`Command: ${pfx}clear`)
-                embed.setDescription(`**Description:** Purge messsages\n**Usage:** ${pfx}clear [amount of messages \`1 - 100\`\n**Example:** ${pfx}clear 21`)
+                embed.setDescription(`**Description:** Purge messsages\n**Usage:** ${pfx}clear [amount of messages \`1 - 100\`]\n**Example:** ${pfx}clear 21`)
                 embed.setColor("#ECBCD7")
                 embed.setTimestamp()
                 message.channel.send(embed);
