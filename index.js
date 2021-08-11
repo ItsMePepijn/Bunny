@@ -3,12 +3,23 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 client.commands = new Discord.Collection();
+const embed = new Discord.MessageEmbed()
 
 //On ready
 client.on('ready', () => {
     console.log(client.user.tag + ' Has logged in!');
     client.user.setActivity('my master', { type: 'LISTENING' });
+    readymessage()
 });
+
+//Sends message in logs when bot starts
+function readymessage(){
+    const logs = client.channels.cache.find(channel => channel.id === '864535338977591326');
+    embed.setTitle('Bot started!')
+    embed.setColor('#ECBCD7')
+    embed.setTimestamp()
+    logs.send(embed)
+}
 
 //Config setup
 const { prefix, token } = require ('./config.json');
@@ -46,7 +57,6 @@ setInterval(MemberCount, 60000)
 client.on('messageDelete', message => {
     if(!message.partial){
         const logs = client.channels.cache.find(channel => channel.id === '864535338977591326');
-        const embed = new Discord.MessageEmbed()
         embed.setTitle('Deleted message:')
         embed.setDescription(`**Messsage:** ${message.content}\n**Sent by:** ${message.author}\n**In:** <#${message.channel.id}>`)
         embed.setColor('#ECBCD7')
