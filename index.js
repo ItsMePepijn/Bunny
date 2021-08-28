@@ -1,13 +1,14 @@
 const db = require('quick.db');
 const fs = require('fs');
 const Discord = require('discord.js');
+const chalk = require('chalk')
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 client.commands = new Discord.Collection();
 const embed = new Discord.MessageEmbed()
 
 //On ready
 client.on('ready', () => {
-    console.log(client.user.tag + ' Has logged in!');
+    console.log(chalk.greenBright(client.user.tag + ' Has logged in!'));
     client.user.setActivity('my master', { type: 'LISTENING' });
     readymessage()
 });
