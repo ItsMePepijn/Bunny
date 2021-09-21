@@ -23,8 +23,7 @@ function readymessage(){
 }
 
 //Config setup
-const { prefix, token } = require ('./config.json');
-db.set('prefix', prefix)
+const token = require ('./config.json');
 
 //Commands setup
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
