@@ -12,7 +12,7 @@
     "axios": "^0.21.1",
     "canvas": "^2.8.0",
     "chalk": "^4.1.2",
-    "discord.js": "^12.5.3",
+    "discord.js": "^13.1.0",
     "fs": "0.0.1-security",
     "mongodb": "^4.1.0",
     "mongoose": "^5.13.7",
