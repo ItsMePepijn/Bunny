@@ -2,7 +2,8 @@ const db = require('quick.db');
 const fs = require('fs');
 const Discord = require('discord.js');
 const chalk = require('chalk')
-const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const ClientIntents = new Discord.Intents([Discord.Intents.MESSAGE_CREATE]);
+const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] }, { intents: ClientIntents });
 client.commands = new Discord.Collection();
 const embed = new Discord.MessageEmbed()
 
