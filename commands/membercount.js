@@ -8,7 +8,7 @@ module.exports = {
         embed.setColor('#ECBCD7')
         embed.addField('Members', message.guild.memberCount)
         embed.setTimestamp()
-        message.channel.send(embed);
+        message.channel.send({embeds: [embed] });
         console.log('Embed sent')
 	},
 };

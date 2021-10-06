@@ -11,7 +11,7 @@ module.exports = {
             embed.setImage(message.author.displayAvatarURL({ format: "png", dynamic: true }))
             embed.setColor("#ECBCD7")
             embed.setTimestamp()
-            message.channel.send(embed);
+            message.channel.send({embeds: [embed] });
             console.log('Embed sent');
         }
         else{
@@ -20,7 +20,7 @@ module.exports = {
             embed.setImage(user.displayAvatarURL({ format: "png", dynamic: true }))
             embed.setColor('#ECBCD7')
             embed.setTimestamp()
-            message.channel.send(embed);
+            message.channel.send({embeds: [embed] });
             console.log('Embed sent');
         }
     }

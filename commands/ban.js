@@ -17,7 +17,7 @@ module.exports = {
                     embed.setDescription('I can\'t ban this user!')
                     embed.setColor("#ECBCD7")
                     embed.setTimestamp()
-                    message.channel.send(embed);
+                    message.channel.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
                 else {
@@ -35,8 +35,8 @@ module.exports = {
                         reason: banreason
                     });
                     console.log(`Banned ${target.tag} for ${banreason}`)
-                    message.channel.send(embed);
-                    logs.send(embed);
+                    message.channel.send({embeds: [embed] });
+                    logs.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
             } else{
@@ -44,7 +44,7 @@ module.exports = {
                 embed.setDescription(`**Description:** Ban a member\n**Usage:** ${pfx}ban [user] [reason]\n**Example:** ${pfx}ban noobmaster69 not cool`)
                 embed.setColor("#ECBCD7")
                 embed.setTimestamp()
-                message.channel.send(embed);
+                message.channel.send({embeds: [embed] });
                 console.log('Embed sent');    
             }
         }
@@ -53,7 +53,7 @@ module.exports = {
             embed.setDescription('You do not have the required permissions!')
             embed.setColor("#ECBCD7")
             embed.setTimestamp()
-            message.channel.send(embed);
+            message.channel.send({embeds: [embed] });
             console.log('Embed sent');
         }
     }

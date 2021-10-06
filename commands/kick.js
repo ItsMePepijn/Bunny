@@ -17,7 +17,7 @@ module.exports = {
                     embed.setDescription('I can\'t kick this user!')
                     embed.setColor("#ECBCD7")
                     embed.setTimestamp()
-                    message.channel.send(embed);
+                    message.channel.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
                 else {
@@ -32,8 +32,8 @@ module.exports = {
                     embed.setTimestamp()
                     user.kick(reason);
                     console.log(`Kicked ${target.tag} for ${reason}`)
-                    message.channel.send(embed);
-                    logs.send(embed);
+                    message.channel.send({embeds: [embed] });
+                    logs.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
             } else{
@@ -41,7 +41,7 @@ module.exports = {
                 embed.setDescription(`**Description:** Kick a member\n**Usage:** ${pfx}kick [user] [reason]\n**Example:** ${pfx}kick noobmaster69  not cool`)
                 embed.setColor("#ECBCD7")
                 embed.setTimestamp()
-                message.channel.send(embed);
+                message.channel.send({embeds: [embed] });
                 console.log('Embed sent');    
             }
         }
@@ -50,7 +50,7 @@ module.exports = {
             embed.setDescription('You do not have the requiring permissions!')
             embed.setColor("#ECBCD7")
             embed.setTimestamp()
-            message.channel.send(embed);
+            message.channel.send({embeds: [embed] });
             console.log('Embed sent');
         }
     }

@@ -15,7 +15,7 @@ module.exports = {
                 embed.setDescription(`**Description:** Purge messsages\n**Usage:** ${pfx}clear [amount of messages \`1 - 100\`]\n**Example:** ${pfx}clear 21`)
                 embed.setColor("#ECBCD7")
                 embed.setTimestamp()
-                message.channel.send(embed);
+                message.channel.send({embeds: [embed] });
                 console.log('Embed sent');
             }
             else{
@@ -24,7 +24,7 @@ module.exports = {
                     embed.setDescription('That is not a number!')
                     embed.setColor("#ECBCD7")
                     embed.setTimestamp()
-                    message.channel.send(embed);
+                    message.channel.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
                 else{
@@ -33,7 +33,7 @@ module.exports = {
                         embed.setDescription('You must choose an amount of messages between \`1\` and \`100\`')
                         embed.setColor("#ECBCD7")
                         embed.setTimestamp()
-                        message.channel.send(embed);
+                        message.channel.send({embeds: [embed] });
                         console.log('Embed sent');
                     }
                     else{
@@ -47,8 +47,8 @@ module.exports = {
                         embed.setColor("#ECBCD7")
                         embed.setTimestamp()
                         message.channel.bulkDelete(messages)
-                        message.channel.send(embed);
-                        logs.send(embed);
+                        message.channel.send({embeds: [embed] });
+                        logs.send({embeds: [embed] });
                         console.log('Embed sent');
                         console.log(`Deleted ${messages} messages in ${message.channel.name}`)
                     }
@@ -60,7 +60,7 @@ module.exports = {
             embed.setDescription('You do not have the requiring permissions!')
             embed.setColor("#ECBCD7")
             embed.setTimestamp()
-            message.channel.send(embed);
+            message.channel.send({embeds: [embed] });
             console.log('Embed sent');
         }
     }

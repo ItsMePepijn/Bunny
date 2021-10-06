@@ -1,9 +1,19 @@
 const db = require('quick.db');
 const fs = require('fs');
 const Discord = require('discord.js');
-const chalk = require('chalk')
-const ClientIntents = new Discord.Intents([Discord.Intents.MESSAGE_CREATE]);
-const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] }, { intents: ClientIntents });
+const chalk = require('chalk');
+
+const DIF = Discord.Intents.FLAGS
+const ClientIntents = new Discord.Intents([
+    DIF.GUILDS, 
+    DIF.GUILD_MESSAGES, 
+    DIF.GUILD_BANS,
+    DIF.GUILD_MEMBERS,
+    DIF.DIRECT_MESSAGES,
+]);
+
+const client = new Discord.Client({ intents: ClientIntents, partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+
 client.commands = new Discord.Collection();
 const embed = new Discord.MessageEmbed()
 
@@ -20,11 +30,11 @@ function readymessage(){
     embed.setTitle('Bot started!')
     embed.setColor('#ECBCD7')
     embed.setTimestamp()
-    logs.send(embed)
+    logs.send({embeds: [embed] })
 }
 
 //Config setup
-const token = require ('./config.json');
+const {token} = require('./config.json');
 
 //Commands setup
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -34,7 +44,7 @@ for (const file of commandFiles) {
 }
 
 //Command handler
-client.on('message', message => {
+client.on('messageCreate', message => {
     const pfx = db.get('prefix');
     if (!message.content.startsWith(pfx) || message.author.bot || !message.guild) return;
     const args = message.content.slice(pfx.length).trim().split(' ');
@@ -62,7 +72,7 @@ client.on('messageDelete', message => {
         embed.setDescription(`**Messsage:** ${message.content}\n**Sent by:** ${message.author}\n**In:** <#${message.channel.id}>`)
         embed.setColor('#ECBCD7')
         embed.setTimestamp()
-        logs.send(embed)
+        logs.send({embeds: [embed] })
     }
 });
 

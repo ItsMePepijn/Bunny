@@ -13,7 +13,7 @@ module.exports = {
             embed.setColor("#ECBCD7")
             embed.setTimestamp()
 			embed.setImage(res.data[0].url)
-			message.channel.send(embed);
+			message.channel.send({embeds: [embed] });
 			console.log('Embed sent')
 		})
 		.catch((err) => {

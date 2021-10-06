@@ -20,8 +20,8 @@ module.exports = {
                     embed.setTimestamp()
                     message.channel.setRateLimitPerUser(0);
                     console.log(`Removed slowmode in ${message.channel.name}`)
-                    message.channel.send(embed);
-                    logs.send(embed);
+                    message.channel.send({embeds: [embed] });
+                    logs.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
                 else if(isNaN(milliseconds) || milliseconds < 1000){
@@ -29,7 +29,7 @@ module.exports = {
                     embed.setDescription('That is not a valid time!')
                     embed.setColor("#ECBCD7")
                     embed.setTimestamp()
-                    message.channel.send(embed);
+                    message.channel.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
                 else{
@@ -39,8 +39,8 @@ module.exports = {
                     embed.setTimestamp()
                     message.channel.setRateLimitPerUser(milliseconds / 1000);
                     console.log(`Set slowmode in ${message.channel.name} to ${ms(milliseconds, { long: true})}`)
-                    message.channel.send(embed);
-                    logs.send(embed);
+                    message.channel.send({embeds: [embed] });
+                    logs.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
             }
@@ -49,7 +49,7 @@ module.exports = {
                 embed.setDescription(`**Description:** Set the slowmode in a channel\n**Usage:** ${pfx}slowmode [time] or "remove"\n**Example:** ${pfx}slowmode 10s\n${pfx}slowmode remove`)
                 embed.setColor("#ECBCD7")
                 embed.setTimestamp()
-                message.channel.send(embed);
+                message.channel.send({embeds: [embed] });
                 console.log('Embed sent');
             }
         }
@@ -58,7 +58,7 @@ module.exports = {
             embed.setDescription('You do not have the requiring permissions!')
             embed.setColor("#ECBCD7")
             embed.setTimestamp()
-            message.channel.send(embed);
+            message.channel.send({embeds: [embed] });
             console.log('Embed sent');
         }
 	},
