@@ -6,7 +6,7 @@ module.exports = {
 	execute(message) {
         const embed = new Discord.MessageEmbed()
         embed.setColor('#ECBCD7')
-        embed.addField('Members', message.guild.memberCount)
+        embed.addField('Members', message.guild.memberCount.toString())
         embed.setTimestamp()
         message.channel.send({embeds: [embed] });
         console.log('Embed sent')
