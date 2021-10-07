@@ -24,7 +24,7 @@ module.exports = {
                     logs.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
-                else if(isNaN(milliseconds) || milliseconds < 1000){
+                else if(isNaN(milliseconds) || milliseconds < 1000 || milliseconds > 21600000){
                     embed.setTitle('Error')
                     embed.setDescription('That is not a valid time!')
                     embed.setColor("#ECBCD7")
