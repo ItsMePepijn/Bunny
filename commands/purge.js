@@ -8,7 +8,7 @@ module.exports = {
         const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
         const pfx = db.get('prefix');
         const embed = new Discord.MessageEmbed()
-        if(message.member.hasPermission('MANAGE_MESSAGES') || message.member.hasPermission('ADMINISTRATOR')){
+        if(message.member.permissions.has('MANAGE_MESSAGES') || message.member.permissions.has('ADMINISTRATOR')){
             const messages = args[0]
             if(!messages){
                 embed.setTitle(`Command: ${pfx}clear`)

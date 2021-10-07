@@ -9,7 +9,7 @@ module.exports = {
         const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
         const embed = new Discord.MessageEmbed
         const pfx = db.get('prefix');
-        if(message.member.hasPermission('MANAGE_CHANNELS') || message.member.hasPermission('ADMINISTRATOR')){
+        if(message.member.permissions.has('MANAGE_CHANNELS') || message.member.permissions.has('ADMINISTRATOR')){
             if(args[0]){
                 const raw = args[0];
                 const milliseconds = ms(raw);

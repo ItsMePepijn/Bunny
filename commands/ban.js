@@ -8,11 +8,11 @@ module.exports = {
         const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
         const embed = new discord.MessageEmbed
         const pfx = db.get('prefix');
-        if(message.member.hasPermission('BAN_MEMBERS') || message.member.hasPermission('ADMINISTRATOR')){
+        if(message.member.permissions.has('BAN_MEMBERS') || message.member.permissions.has('ADMINISTRATOR')){
             const user = message.mentions.members.first()
             const target = message.mentions.users.first()
             if(user){
-                if(user.hasPermission('ADMINISTRATOR') || user.hasPermission('KICK_MEMBERS') || user.hasPermission('BAN_MEMBERS')){
+                if(user.permissions.has('BAN_MEMBERS') || user.permissions.has('ADMINISTRATOR') || user.permissions.has('KICK_MEMBERS')){
                     embed.setTitle('Error')
                     embed.setDescription('I can\'t ban this user!')
                     embed.setColor("#ECBCD7")

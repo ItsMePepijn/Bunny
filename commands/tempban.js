@@ -8,11 +8,12 @@ module.exports = {
         const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
         const embed = new discord.MessageEmbed
         const pfx = db.get('prefix');
-        if(message.member.hasPermission('BAN_MEMBERS') || message.member.hasPermission('ADMINISTRATOR')){
+        if(message.member.permissions.has('BAN_MEMBERS') || message.member.permissions.has('ADMINISTRATOR')){
             const user = message.mentions.members.first()
             const target = message.mentions.users.first()
+            const days = Math.round(parseInt(args[1]));
             if(user){
-                if(user.hasPermission('ADMINISTRATOR') || user.hasPermission('KICK_MEMBERS') || user.hasPermission('BAN_MEMBERS')){
+                if(user.permissions.has('BAN_MEMBERS') || user.member.permissions.has('ADMINISTRATOR') || user.member.permissions.has('KICK_MEMBERS')){
                     embed.setTitle('Error')
                     embed.setDescription('I can\'t ban this user!')
                     embed.setColor("#ECBCD7")
@@ -21,7 +22,7 @@ module.exports = {
                     console.log('Embed sent');
                 }
                 else {
-                    if(args[1] == '1' || args[1] == '2' || args[1] == '3' || args[1] == '4' || args[1] == '5' || args[1] === '6' || args[1] === '7'){
+                    if(days > 0 && days < 9){
                         if(args.length === 2){
                             var banreason = ('None')
                         }else{
