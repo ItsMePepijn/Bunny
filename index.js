@@ -4,15 +4,15 @@ const Discord = require('discord.js');
 const chalk = require('chalk');
 
 const DIF = Discord.Intents.FLAGS
-const ClientIntents = new Discord.Intents([
+
+const client = new Discord.Client({ intents: [
     DIF.GUILDS, 
     DIF.GUILD_MESSAGES, 
     DIF.GUILD_BANS,
     DIF.GUILD_MEMBERS,
     DIF.DIRECT_MESSAGES,
-]);
-
-const client = new Discord.Client({ intents: ClientIntents, partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+], 
+partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
 client.commands = new Discord.Collection();
 const embed = new Discord.MessageEmbed()
