@@ -4,7 +4,6 @@ const Discord = require('discord.js');
 const chalk = require('chalk');
 
 const DIF = Discord.Intents.FLAGS
-
 const client = new Discord.Client({ intents: [
     DIF.GUILDS, 
     DIF.GUILD_MESSAGES, 
@@ -17,10 +16,23 @@ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 client.commands = new Discord.Collection();
 const embed = new Discord.MessageEmbed()
 
+//Commands setup
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+}
+
+const muteloop = client.commands.get('muteloop');
+function muteloopstart(){
+    muteloop.execute(client)
+}
+
 //On ready
 client.on('ready', () => {
     console.log(chalk.greenBright(client.user.tag + ' Has logged in!'));
     client.user.setActivity('my master', { type: 'LISTENING' });
+    setInterval(muteloopstart, 10000);
     readymessage()
 });
 
@@ -35,13 +47,6 @@ function readymessage(){
 
 //Config setup
 const {token} = require('./config.json');
-
-//Commands setup
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    client.commands.set(command.name, command);
-}
 
 //Command handler
 client.on('messageCreate', message => {
