@@ -14,12 +14,12 @@ module.exports = {
         guild.members.fetch().then(members => {
             members.forEach(member => {
                 if(member.roles.cache.has(muterole.id)){
-                    if(db.has(`member_${member.user.id}`)){
-                        var time = db.get(`member_${member.user.id}`);
+                    if(db.has(`mutedmember_${member.user.id}.time`)){
+                        var time = db.get(`mutedmember_${member.user.id}.time`);
                         var check = time - Date.now()
                         if(check <= 0){
                             member.roles.remove(muterole);
-                            db.delete(`member_${member.user.id}`);
+                            db.delete(`mutedmember_${member.user.id}.time`);
                             console.log(`Unmuted ${member.user.tag}`);
                             embed.setTitle(`${member.user.tag} has been unmuted!`);
                             embed.setDescription(`**By:** <@${client.user.id}>\n**Reason:** Time expired`);
