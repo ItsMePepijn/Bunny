@@ -5,9 +5,9 @@ module.exports = {
     name: 'muteloop',
     description: 'loops through every member in the guld and checks if it should be unmuted',
     execute(client){
-        const guild = client.guilds.cache.find(guild => guild.id === "863732935035060264");
-        const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
-        const muterole = guild.roles.cache.find(role => role.id === '897820144833798224');
+        const guild = client.guilds.cache.get("863732935035060264");
+        const logs = guild.channels.cache.get('864535338977591326');
+        const muterole = guild.roles.cache.get('897820144833798224');
         const embed = new Discord.MessageEmbed()
         embed.setColor("#ECBCD7")
         embed.setTimestamp()
