@@ -54,6 +54,7 @@ client.on('messageCreate', message => {
     if (!message.content.startsWith(pfx) || message.author.bot || !message.guild) return;
     const args = message.content.slice(pfx.length).trim().split(' ');
     const command = args.shift().toLowerCase();
+    if(command === 'muteloop') return;
 
     const file = client.commands.get(command);
     if(file) file.execute(message, args, client);
