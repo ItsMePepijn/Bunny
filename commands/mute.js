@@ -54,10 +54,15 @@ module.exports = {
                             embed.setDescription(`**Reason:** ${mutereason}\n**Duration:** ${ms(milliseconds, { long: true })}\n**By:** ${message.member}`)
                             embed.setColor("#ECBCD7")
                             embed.setTimestamp()
-                            db.set(`member_${target.id}`, { username: `${target.tag}`, mutedtime: `${timetotal}`, mutedreason: `${mutereason}`});
+                            db.set(`member_${target.id}.username`, target.tag);
+                            db.set(`member_${target.id}.mutedtime`, timetotal);
+                            db.set(`member_${target.id}.mutedreason`, mutereason);
+                            db.add(`member_${target.id}.infractions`, 1);
                             user.roles.add(muterole);
                             message.channel.send({embeds: [embed] });
-                            logs.send({embeds: [embed]});
+                            logs.send({embeds: [embed]});4
+                            console.log(`${target.tag} has been muted for ${ms(milliseconds, { long: true})}`);
+                            console.log(`${target.tag} now has ${db.get(`member_${target.id}.infractions`)} infractions`)
                             console.log('Embed sent');
                         }
                     }
