@@ -15,14 +15,20 @@ module.exports = {
             const user = message.mentions.members.first();
             if(user){
                 if(user.roles.cache.has('897820144833798224')){
+                    if(args.length === 1){
+                        var unmutereason = ('None')
+                    }else{
+                        var unmutereason = (args.slice(1).join(' '))
+                    }
                     embed.setTitle(`${target.tag} has been unmuted!`)
-                    embed.setDescription(`**By:** ${message.member}`)
+                    embed.setDescription(`**By:** ${message.member}\n**Reason:** ${unmutereason}`)
                     embed.setColor("#ECBCD7")
                     embed.setTimestamp()
                     user.roles.remove(muterole)
                     db.delete(`member_${target.id}.mutedtime`);
                     db.delete(`member_${target.id}.mutedreason`);
                     message.channel.send({embeds: [embed] });
+                    logs.send({embeds: [embed]})
                     console.log('Embed sent');
                 }
                 else{
@@ -36,7 +42,7 @@ module.exports = {
             }
             else{
                 embed.setTitle(`Command: ${pfx}unmute`)
-                embed.setDescription(`**Description:** unmutes a member\n**Usage:** ${pfx}unmute [user]\n**Example:** ${pfx}unmute noobmaster69`)
+                embed.setDescription(`**Description:** unmutes a member\n**Usage:** ${pfx}unmute [user] [reason]\n**Example:** ${pfx}unmute noobmaster69 said sorry`)
                 embed.setColor("#ECBCD7")
                 embed.setTimestamp()
                 message.channel.send({embeds: [embed] });
