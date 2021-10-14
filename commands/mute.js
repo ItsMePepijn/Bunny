@@ -4,7 +4,7 @@ const ms = require('ms');
  
 module.exports = {
     name: 'mute',
-    description: 'mutes a user fr a certain amount of time',
+    description: 'mutes a user for a certain amount of time',
     execute(message, args, client){
         const guild = client.guilds.cache.get("863732935035060264");
         const muterole = guild.roles.cache.get('897820144833798224');
