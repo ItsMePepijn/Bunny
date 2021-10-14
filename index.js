@@ -20,6 +20,7 @@ const embed = new Discord.MessageEmbed()
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
+    console.log(chalk.greenBright('[COMMAND HANDLER]') + ' - ' + chalk.blueBright(`${file} has been loaded`))
     client.commands.set(command.name, command);
 }
 
