@@ -83,4 +83,25 @@ client.on('messageDelete', message => {
     }
 });
 
+client.on('guildMemberAdd', member => {
+    if(db.has(`member_${member.user.id}.mutedtime`)){
+        var time = db.get(`member_${member.user.id}.mutedtime`);
+        var check = time - Date.now()
+        const muterole = member.guild.roles.cache.get('897820144833798224');
+        const logs = member.guild.channels.cache.get('864535338977591326');
+        if(check <= 0){
+            db.delete(`member_${member.user.id}.mutedtime`);
+            db.delete(`member_${member.user.id}.mutedreason`);
+            console.log(`Unmuted ${member.user.tag}`);
+            embed.setTitle(`${member.user.tag} has been unmuted!`);
+            embed.setDescription(`**By:** <@${client.user.id}>\n**Reason:** Time expired`);
+            logs.send({embeds: [embed]});
+            console.log('Embed sent');
+        } else { 
+            member.roles.add(muterole);
+            console.log(`${member.user.tag} has joined the server and has been given the mute role!`);
+        }
+    }
+});
+
 client.login(token);
