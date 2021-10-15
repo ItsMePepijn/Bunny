@@ -34,6 +34,7 @@ client.on('ready', () => {
     console.log(chalk.greenBright(client.user.tag + ' Has logged in!'));
     client.user.setActivity('my master', { type: 'LISTENING' });
     setInterval(muteloopstart, 10000);
+    setInterval(MemberCount, 60000)
     readymessage()
 });
 
@@ -67,9 +68,8 @@ function MemberCount(){
     const guild = client.guilds.cache.find(guild => guild.id === "863732935035060264");
     if (!channel) return;
     channel.setName(`୨・${guild.memberCount}`);
-    console.log('Updated membercount');
 }
-setInterval(MemberCount, 60000)
+
 
 //deleted message logger
 client.on('messageDelete', message => {
