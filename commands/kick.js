@@ -27,7 +27,7 @@ module.exports = {
                         var reason = (args.slice(1).join(' '))
                     }
                     embed.setAuthor(`${target.tag} has been kicked!`, target.displayAvatarURL())
-                    embed.setDescription('**Reason:** ' + reason + '\n**For:** ' + time+ '\n**By:** <@' + message.member + '>')
+                    embed.setDescription(`**By:** <@${message.member}>\n**Reason:** ${reason}`)
                     embed.setColor("#ECBCD7")
                     embed.setTimestamp()
                     user.kick(reason);
