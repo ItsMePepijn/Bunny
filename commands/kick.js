@@ -47,7 +47,7 @@ module.exports = {
         }
         else {
             embed.setTitle('Error')
-            embed.setDescription('You do not have the requiring permissions!')
+            embed.setDescription('You do not have the required permissions!')
             embed.setColor("#ECBCD7")
             embed.setTimestamp()
             message.channel.send({embeds: [embed] });
