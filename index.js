@@ -2,6 +2,7 @@ const db = require('quick.db');
 const fs = require('fs');
 const Discord = require('discord.js');
 const chalk = require('chalk');
+const pfx = db.get('prefix');
 
 const DIF = Discord.Intents.FLAGS
 const client = new Discord.Client({ intents: [
@@ -52,7 +53,6 @@ const {token} = require('./config.json');
 
 //Command handler
 client.on('messageCreate', message => {
-    const pfx = db.get('prefix');
     if (!message.content.startsWith(pfx) || message.author.bot || !message.guild) return;
     const args = message.content.slice(pfx.length).trim().split(' ');
     const command = args.shift().toLowerCase();
@@ -74,6 +74,7 @@ function MemberCount(){
 //deleted message logger
 client.on('messageDelete', message => {
     if(!message.partial){
+        if(message.content === `${pfx}verify`) return
         const logs = client.channels.cache.find(channel => channel.id === '864535338977591326');
         embed.setTitle('Deleted message:')
         embed.setDescription(`**Messsage:** ${message.content}\n**Sent by:** ${message.author}\n**In:** <#${message.channel.id}>`)
