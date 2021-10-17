@@ -46,7 +46,7 @@ module.exports = {
                         embed.setDescription(`**Amount:** ${messages}\n**In:** <#${message.channel.id}>\n**By:** ${message.member}`)
                         embed.setColor("#ECBCD7")
                         embed.setTimestamp()
-                        message.channel.bulkDelete(messages)
+                        message.channel.bulkDelete(messages, true)
                         message.channel.send({embeds: [embed] });
                         logs.send({embeds: [embed] });
                         console.log('Embed sent');
