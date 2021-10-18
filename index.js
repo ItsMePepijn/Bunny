@@ -53,6 +53,12 @@ const {token} = require('./config.json');
 
 //Command handler
 client.on('messageCreate', message => {
+    if(message.channel.id == '899636638681006080'){
+        if(message.author.bot) return
+        if(!message.content.startsWith(`${pfx}suggest`)){
+            message.delete();
+        }
+    }
     if (!message.content.startsWith(pfx) || message.author.bot || !message.guild) return;
     const args = message.content.slice(pfx.length).trim().split(' ');
     const command = args.shift().toLowerCase();
@@ -75,6 +81,8 @@ function MemberCount(){
 client.on('messageDelete', message => {
     if(!message.partial){
         if(message.content === `${pfx}verify`) return
+        if(message.author.bot) return
+        if(message.channel.id == '899636638681006080') return
         const logs = client.channels.cache.find(channel => channel.id === '899603341812842527');
         embed.setTitle('Deleted message:')
         embed.setDescription(`**Messsage:** ${message.content}\n**Sent by:** ${message.author}\n**In:** <#${message.channel.id}>`)
