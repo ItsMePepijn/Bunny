@@ -41,7 +41,7 @@ client.on('ready', () => {
 
 //Sends message in logs when bot starts
 function readymessage(){
-    const logs = client.channels.cache.find(channel => channel.id === '864535338977591326');
+    const logs = client.channels.cache.find(channel => channel.id === '899644501071659008');
     embed.setTitle('Bot started!')
     embed.setColor('#ECBCD7')
     embed.setTimestamp()
