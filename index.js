@@ -75,7 +75,7 @@ function MemberCount(){
 client.on('messageDelete', message => {
     if(!message.partial){
         if(message.content === `${pfx}verify`) return
-        const logs = client.channels.cache.find(channel => channel.id === '864535338977591326');
+        const logs = client.channels.cache.find(channel => channel.id === '899603341812842527');
         embed.setTitle('Deleted message:')
         embed.setDescription(`**Messsage:** ${message.content}\n**Sent by:** ${message.author}\n**In:** <#${message.channel.id}>`)
         embed.setColor('#ECBCD7')

@@ -6,7 +6,7 @@ module.exports = {
     description: 'warns a member',
     execute(message, args, client){
         const guild = client.guilds.cache.get("863732935035060264");
-        const logs = guild.channels.cache.get('864535338977591326');
+        const warnlogs = guild.channels.cache.get('899603877790367746');
         const embed = new Discord.MessageEmbed
         const pfx = db.get('prefix');
         if(message.member.permissions.has('MANAGE_MESSAGES') || message.member.permissions.has('ADMINISTRATOR')){
@@ -25,6 +25,7 @@ module.exports = {
                 console.log(`${target.tag} has been warned`)
                 console.log(`${target.tag} now has ${db.get(`member_${target.id}.infractions`)} infractions`)
                 message.channel.send({embeds: [embed] });
+                warnlogs.send({embeds: [embed]})
                 console.log('Embed sent');
             }
             else{
