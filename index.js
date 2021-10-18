@@ -53,14 +53,18 @@ const {token} = require('./config.json');
 
 //Command handler
 client.on('messageCreate', message => {
+    const args = message.content.slice(pfx.length).trim().split(' ');
     if(message.channel.id == '899636638681006080'){
-        if(message.author.bot) return
-        if(!message.content.startsWith(`${pfx}suggest`)){
-            message.delete();
+        if(message.author.id == '872841043354198047') return
+        if(args[0] != 'suggest') return message.delete();
+    }
+    if(message.channel.id == '898537277599404034'){
+        if(message.author.id == '872841043354198047') return
+        if(message.content != `${pfx}verify`){
+            return message.delete();
         }
     }
     if (!message.content.startsWith(pfx) || message.author.bot || !message.guild) return;
-    const args = message.content.slice(pfx.length).trim().split(' ');
     const command = args.shift().toLowerCase();
     if(command === 'muteloop') return;
 
@@ -83,6 +87,7 @@ client.on('messageDelete', message => {
         if(message.content === `${pfx}verify`) return
         if(message.author.bot) return
         if(message.channel.id == '899636638681006080') return
+        if(message.channel.id == '898537277599404034') return
         const logs = client.channels.cache.find(channel => channel.id === '899603341812842527');
         embed.setTitle('Deleted message:')
         embed.setDescription(`**Messsage:** ${message.content}\n**Sent by:** ${message.author}\n**In:** <#${message.channel.id}>`)
