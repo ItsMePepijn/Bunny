@@ -51,7 +51,6 @@ function readymessage(){
 
 //Config setup
 const {token} = require(__dirname + '/config.json');
-const { dirname } = require('path');
 
 //Command handler
 client.on('messageCreate', message => {
