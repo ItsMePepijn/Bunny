@@ -18,9 +18,9 @@ client.commands = new Discord.Collection();
 const embed = new Discord.MessageEmbed()
 
 //Commands setup
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(__dirname + '/commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
+    const command = require(__dirname + `/commands/${file}`);
     console.log(chalk.greenBright('[COMMAND HANDLER]') + ' - ' + chalk.blueBright(`${file} has been loaded`));
     client.commands.set(command.name, command);
 }
@@ -37,6 +37,7 @@ client.on('ready', () => {
     setInterval(muteloopstart, 10000);
     setInterval(MemberCount, 60000)
     readymessage()
+    
 });
 
 //Sends message in logs when bot starts
@@ -49,7 +50,8 @@ function readymessage(){
 }
 
 //Config setup
-const {token} = require('./config.json');
+const {token} = require(__dirname + '/config.json');
+const { dirname } = require('path');
 
 //Command handler
 client.on('messageCreate', message => {
