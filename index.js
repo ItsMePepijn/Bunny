@@ -33,11 +33,11 @@ function muteloopstart(){
 //On ready
 client.on('ready', () => {
     console.log(chalk.greenBright(client.user.tag + ' Has logged in!'));
-    client.user.setPresence({ activities: [{ name: 'my master', type: 'LISTENING' }], status: 'idle' });
+    status();
     setInterval(muteloopstart, 10000);
     setInterval(MemberCount, 60000);
     setInterval(status, 600000);
-    readymessage()
+    readymessage();
     
 });
 
@@ -128,7 +128,7 @@ client.on('guildMemberAdd', member => {
 });
 
 function status(){
-    client.user.setPresence({ activities: [{ name: 'my master', type: 'LISTENING' }], status: 'idle' });
+    client.user.setPresence({ activities: [{ name: 'my master', type: 'LISTENING' }], status: 'dnd' });
 }
 
 client.login(token);
