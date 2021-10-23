@@ -2,7 +2,6 @@ const db = require('quick.db');
 const fs = require('fs');
 const Discord = require('discord.js');
 const chalk = require('chalk');
-const { setInternalBufferSize } = require('bson');
 const pfx = db.get('prefix');
 
 const DIF = Discord.Intents.FLAGS
