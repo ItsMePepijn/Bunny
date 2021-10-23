@@ -5,6 +5,7 @@ module.exports = {
     name: 'mutestatus',
     description: 'shows the mutestatus of the mentioned member',
     execute(message){
+        const pfx = db.get('prefix')
         const target = message.mentions.users.first();
         const user = message.mentions.members.first();
         const embed = new Discord.MessageEmbed();
