@@ -2,6 +2,7 @@ const db = require('quick.db');
 const fs = require('fs');
 const Discord = require('discord.js');
 const chalk = require('chalk');
+const { setInternalBufferSize } = require('bson');
 const pfx = db.get('prefix');
 
 const DIF = Discord.Intents.FLAGS
@@ -33,9 +34,10 @@ function muteloopstart(){
 //On ready
 client.on('ready', () => {
     console.log(chalk.greenBright(client.user.tag + ' Has logged in!'));
-    client.user.setActivity('my master', { type: 'LISTENING' });
+    client.user.setPresence({ activities: [{ name: 'my master', type: 'LISTENING' }], status: 'idle' });
     setInterval(muteloopstart, 10000);
-    setInterval(MemberCount, 60000)
+    setInterval(MemberCount, 60000);
+    setInterval(status, 600000);
     readymessage()
     
 });
@@ -125,5 +127,9 @@ client.on('guildMemberAdd', member => {
 
     }
 });
+
+function status(){
+    client.user.setPresence({ activities: [{ name: 'my master', type: 'LISTENING' }], status: 'idle' });
+}
 
 client.login(token);
