@@ -1,78 +1,174 @@
 const Discord = require('discord.js');
+const { disconnect } = require('mongoose');
 const db = require('quick.db');
+const prefix = db.get('prefix');
 
 module.exports = {
 	name: 'help',
 	description: 'Will bring up the help menu!',
-	execute(message, args) {
-        const prefix = db.get('prefix');
-        let embed = new Discord.MessageEmbed()
-        embed.setColor('#ECBCD7');
-        embed.setTimestamp();
-        if (!args.length) {
-            embed.setTitle('Help centre');
-            embed.addFields(
-              { name: '\u200b', value: `These are all the awesome commands you can use right now!` },
-              { name: 'Help', value: 'The menu you are in right now!', },
-              { name: 'Membercount', value: `Use \`${prefix}help membercount\` for more info`, inline: true },
-              { name: 'Avatar', value: `Use \`${prefix}help (av)atar\` for more info`, inline: true },
-              { name: 'Cat', value: `Use \`${prefix}help cat\` for more info`, inline: true },
-              { name: 'Love', value: `I have a lot of love commands! like \`${prefix}hug\` and \`${prefix}kiss\`. Use \`${prefix}help love\` for more info`, inline: true},
-              { name: 'Dog', value: `Use \`${prefix}help dog\` for more info`, inline: true },
-              { name: 'Mutestatus', value: `Use \`${prefix}help mutestatus\` for more info`, inline: true},
-              { name: 'Warnings', value: `Use \`${prefix}help warnings\` for more info`, inline: true}
-            )
-            console.log('Embed sent')
-            return message.channel.send({embeds: [embed]});
-        } 
-        else if(args[0] == 'membercount'){
-          embed.setTitle('membercount');
-          embed.setDescription('Displays the current membercount');
-          embed.addField('Usage:', `\`${prefix}membercount\``);
-          message.channel.send({embeds: [embed]});
-          console.log('Embed sent')
+	async execute(message, args) {
+
+        let helpEmbed = new Discord.MessageEmbed()
+            .setColor('#ECBCD7')
+            .setTimestamp()
+            .setTitle('Help centre')
+            .addFields(
+            { name: '\u200b', value: `These are all the awesome commands you can use right now!\nClick any of the buttons to view more information about that command` },
+            { name: '> Help,\n> Membercount,\n> Avatar,\n> Cat,\n> Love,\n> Dog,\n> Mutestatus,\n> Warnings', value: '\u200b', inline: true},
+            );
+
+        let membercountEmbed = new Discord.MessageEmbed()
+            .setColor('#ECBCD7')
+            .setTimestamp()
+            .setTitle('membercount')
+            .setDescription('Displays the current membercount')
+            .addField('Usage:', `\`${prefix}membercount\``);
+
+        let avatarEmbed = new Discord.MessageEmbed()
+            .setColor('#ECBCD7')
+            .setTimestamp()
+            .setTitle('Avatar')
+            .setDescription('Displays your or mentioned user\'s avatar')
+            .addField('Usage:', `\`${prefix}(av)atar\``);
+
+        let catEmbed = new Discord.MessageEmbed()
+            .setColor('#ECBCD7')
+            .setTimestamp()
+            .setTitle('Cat')
+            .setDescription('Gives you a cute cat 🥰')
+            .addField('Usage:', `\`${prefix}cat\``);
+        let loveEmbed = new Discord.MessageEmbed()
+            .setColor('#ECBCD7')
+            .setTimestamp()
+            .setTitle('Love')
+            .setDescription('Sends gifs to someone about the specified topic')
+            .addField('Usage:', `\`${prefix}hug, ${prefix}kiss, ${prefix}handshake, ${prefix}punch, ${prefix}shoot and ${prefix}slap\``);
+
+        let dogEmbed = new Discord.MessageEmbed()
+            .setColor('#ECBCD7')
+            .setTimestamp()
+            .setTitle('Dog')
+            .setDescription('Gives you a cute doggo 🥰')
+            .addField('Usage:', `\`${prefix}dog\``);
+
+        let mutestatusEmbed = new Discord.MessageEmbed()
+            .setColor('#ECBCD7')
+            .setTimestamp()
+            .setTitle('Mutestatus')
+            .setDescription('Gives information about a muted member')
+            .addField('Usage:', `\`${prefix}mutestatus noobmaster69\``);
+
+        let warningsEmbed = new Discord.MessageEmbed()
+            .setColor('#ECBCD7')
+            .setTimestamp()
+            .setTitle('Warnings')
+            .setDescription('Displays the warnings from yourself or from another user')
+            .addField('Usage:', `\`${prefix}warnings noobmaster69\``);
+
+        const helpRow1 = new Discord.MessageActionRow().addComponents(
+            new Discord.MessageButton()
+                .setCustomId('membercount')
+                .setLabel('Membercount')
+                .setStyle('SECONDARY'),
+            new Discord.MessageButton()
+                .setCustomId('avatar')
+                .setLabel('Avatar')
+                .setStyle('SECONDARY'),
+            new Discord.MessageButton()
+                .setCustomId('cat')
+                .setLabel('Cat')
+                .setStyle('SECONDARY'),
+            new Discord.MessageButton()
+                .setCustomId('love')
+                .setLabel('Love')
+                .setStyle('SECONDARY'),
+            new Discord.MessageButton()
+                .setCustomId('dog')
+                .setLabel('Dog')
+                .setStyle('SECONDARY')
+        );
+        const helpRow2 = new Discord.MessageActionRow().addComponents(
+            new Discord.MessageButton()
+                .setCustomId('mutestatus')
+                .setLabel('Mutestatus')
+                .setStyle('SECONDARY'),
+            new Discord.MessageButton()
+                .setCustomId('warnings')
+                .setLabel('Warnings')
+                .setStyle('SECONDARY')
+        )
+
+        const backRow = new Discord.MessageActionRow().addComponents(
+            new Discord.MessageButton()
+                .setCustomId('back')
+                .setLabel('Back')
+                .setStyle('SECONDARY'),
+        )
+
+        const response = await message.reply({embeds: [helpEmbed], components: [helpRow1, helpRow2]});
+
+        const filter = (interaction) => {
+            if (interaction.user.id === message.author.id) return true;
+            return interaction.deferUpdate();
         }
-        else if(args[0] == 'avatar'){
-          embed.setTitle('Avatar');
-          embed.setDescription('Displays your or mentioned user\'s avatar');
-          embed.addField('Usage:', `\`${prefix}(av)atar\``);
-          message.channel.send({embeds: [embed]});
-          console.log('Embed sent')
-        }
-        else if(args[0] == 'cat'){
-          embed.setTitle('Cat');
-          embed.setDescription('Gives you a cute cat 🥰');
-          embed.addField('Usage:', `\`${prefix}cat\``);
-          message.channel.send({embeds: [embed]});
-          console.log('Embed sent')
-        }
-        else if(args[0] == 'dog'){
-          embed.setTitle('Dog');
-          embed.setDescription('Gives you a cute doggo 🥰');
-          embed.addField('Usage:', `\`${prefix}dog\``);
-          message.channel.send({embeds: [embed]});
-          console.log('Embed sent')
-        }
-        else if(args[0] == 'love'){
-          embed.setTitle('Love');
-          embed.setDescription('Sends gifs to someone about the specified topic');
-          embed.addField('Usage:', `\`${prefix}hug, ${prefix}kiss, ${prefix}handshake, ${prefix}punch, ${prefix}shoot and ${prefix}slap\``);
-          message.channel.send({embeds: [embed]});
-          console.log('Embed sent')
-        }
-        else if(args[0] == 'warnings'){
-          embed.setTitle('Warnings');
-          embed.setDescription('Displays the warnings from yourself or from another user');
-          embed.addField('Usage:', `\`${prefix}warnings noobmaster69\``);
-          message.channel.send({embeds: [embed]});
-          console.log('Embed sent')
-        }
-        else if(args[0] == 'mutestatus'){
-          embed.setTitle('Mutestatus');
-          embed.setDescription('Gives information about a muted member');
-          embed.addField('Usage:', `\`${prefix}mutestatus noobmaster69\``);
-          message.channel.send({embeds: [embed]});
-          console.log('Embed sent')
-        }
+        const collector = message.channel.createMessageComponentCollector({
+            filter,
+            time: 600000
+        });
+
+        collector.on("collect", (iButton) => {
+    
+            const id = iButton.customId;
+
+            if(id == 'back'){
+                iButton.deferUpdate();
+                response.edit({embeds: [helpEmbed], components: [helpRow1, helpRow2]})
+            }
+            
+            if(id == 'membercount'){
+                iButton.deferUpdate();
+                response.edit({embeds: [membercountEmbed], components: [backRow]})
+            }
+
+            if(id == 'avatar'){
+                iButton.deferUpdate();
+                response.edit({embeds: [avatarEmbed], components: [backRow]})
+            }
+
+            if(id == 'cat'){
+                iButton.deferUpdate();
+                response.edit({embeds: [catEmbed], components: [backRow]})
+            }
+
+            if(id == 'love'){
+                iButton.deferUpdate();
+                response.edit({embeds: [loveEmbed], components: [backRow]})
+            }
+
+            if(id == 'dog'){
+                iButton.deferUpdate();
+                response.edit({embeds: [dogEmbed], components: [backRow]})
+            }
+
+            if(id == 'mutestatus'){
+                iButton.deferUpdate();
+                response.edit({embeds: [mutestatusEmbed], components: [backRow]})
+            }
+
+            if(id == 'warnings'){
+                iButton.deferUpdate();
+                response.edit({embeds: [warningsEmbed], components: [backRow]})
+            }
+
+        });
+
+        collector.on('end', () => {
+            const embed = response.embeds[0]
+            const oldTitle = embed.title
+            embed.setTitle(`${oldTitle} (Closed)`)
+
+            response.edit({embeds: [embed], components: []})
+        })
+
     }
 };
