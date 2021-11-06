@@ -134,7 +134,7 @@ client.on('interactionCreate', interaction => {
                 interaction.deferUpdate();
                 interaction.member.roles.add(memberole);
                 embed.setTitle(`${interaction.user.tag} has veen verified!`);
-                embed.setDescription(`<t:${Math.round(Date.now() / 1000)}:R>`);
+                embed.setDescription(`${interaction.member}\n<t:${Math.round(Date.now() / 1000)}:R>`);
                 embed.setFooter(`${interaction.member.id}`, `${interaction.member.displayAvatarURL({format: 'png', dynamic: true })}`);
                 embed.setColor("#ECBCD7");
                 embed.setTimestamp();
@@ -149,6 +149,8 @@ client.on('interactionCreate', interaction => {
                 chat.send({embeds: [embed2] });
                 console.log('Embed sent');
                 console.log(`${interaction.user.tag} has veen verified!`)
+            }else{
+                interaction.deferUpdate()
             }
         }
     }
