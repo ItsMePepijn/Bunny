@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const { disconnect } = require('mongoose');
 const db = require('quick.db');
 const prefix = db.get('prefix');
 
