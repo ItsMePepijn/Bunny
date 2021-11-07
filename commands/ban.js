@@ -12,7 +12,7 @@ module.exports = {
             const user = message.mentions.members.first()
             const target = message.mentions.users.first()
             if(user){
-                if(user.permissions.has('BAN_MEMBERS') || user.permissions.has('ADMINISTRATOR') || user.permissions.has('KICK_MEMBERS')){
+                if(user.permissions.has('BAN_MEMBERS') || user.permissions.has('ADMINISTRATOR')){
                     embed.setTitle('Error')
                     embed.setDescription('I can\'t ban this user!')
                     embed.setColor("#ECBCD7")
