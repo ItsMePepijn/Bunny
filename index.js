@@ -157,7 +157,7 @@ client.on('interactionCreate', interaction => {
 });
 
 function status(){
-    client.user.setPresence({ activities: [{ name: 'over the server', type: 'WATCHING' }], status: 'dnd' });
+    client.user.setPresence({ activities: [{ name: 'all the cuties', type: 'WATCHING' }], status: 'dnd' });
 }
 
 client.login(token);
