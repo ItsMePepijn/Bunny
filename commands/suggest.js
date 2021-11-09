@@ -20,7 +20,7 @@ module.exports = {
                 message.delete();
 
                 embed2.setTitle('New suggestion!');
-                embed2.setDescription(`**by:** ${message.member}\n**Suggestion:** ${args}`)
+                embed2.setDescription(`**by:** ${message.member}\n**Suggestion:** ${message.content.slice(8)}`)
                 embed2.setColor("#ECBCD7")
                 embed2.setTimestamp()
                 suggest.send({embeds: [embed2] });
