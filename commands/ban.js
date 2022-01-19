@@ -21,7 +21,7 @@ module.exports = {
                     console.log('Embed sent');
                 }
                 else {
-                    if(args.length === 2){
+                    if(args.length === 1){
                         var banreason = ('None')
                     }else{
                         var banreason = (args.slice(1).join(' '))
