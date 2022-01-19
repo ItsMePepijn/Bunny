@@ -24,7 +24,7 @@ module.exports = {
                     if(args.length === 2){
                         var banreason = ('None')
                     }else{
-                        var banreason = (args.slice(2).join(' '))
+                        var banreason = (args.slice(1).join(' '))
                     }
                     embed.setTitle(`${target.tag} has been banned!`, target.displayAvatarURL())
                     embed.setDescription('**Reason:** ' + banreason + '\n**By:** <@' + message.member + '>')
