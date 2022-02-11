@@ -36,7 +36,7 @@ client.on('ready', () => {
     console.log(chalk.greenBright(client.user.tag + ' Has logged in!'));
     status();
     setInterval(muteloopstart, 10000);
-    setInterval(MemberCount, 60000);
+    setInterval(MemberCount, 300000);
     setInterval(status, 600000);
     readymessage();
     
