@@ -5,9 +5,9 @@ module.exports = {
     name: 'ban',
     description: 'Bans the specified user',
     isStaff: true,
-    execute(message, args, guild){
-        const logs = guild.channels.cache.find(channel => channel.id === db.get('channels.logs.ban'));
-        const embed = new discord.MessageEmbed
+    execute(message, args){
+        const logs = message.guild.channels.cache.find(channel => channel.id === db.get('channels.logs.ban'));
+        const embed = new discord.MessageEmbed()
         const pfx = db.get('prefix');
         if(message.member.permissions.has('BAN_MEMBERS') || message.member.permissions.has('ADMINISTRATOR')){
             const member = message.mentions.members.first()

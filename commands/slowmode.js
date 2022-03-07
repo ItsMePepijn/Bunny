@@ -6,8 +6,8 @@ module.exports = {
 	name: 'slowmode',
 	description: 'Will set or remove the slowmode in a channel',
     isStaff: true,
-	execute(message, args, guild) {
-        const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
+	execute(message, args) {
+        const logs = message.guild.channels.cache.find(channel => channel.id === '864535338977591326');
         const embed = new Discord.MessageEmbed
         const pfx = db.get('prefix');
         if(message.member.permissions.has('MANAGE_CHANNELS') || message.member.permissions.has('ADMINISTRATOR')){

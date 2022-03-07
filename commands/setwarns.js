@@ -1,11 +1,12 @@
 const Discord = require('discord.js');
 const db =  require('quick.db');
+const client = require('../modules/client')
  
 module.exports = {
     name: 'setwarnings',
     description: 'set the warns of a member',
     isStaff: true,
-    execute(message, args, client){
+    execute(message, args){
         const guild = client.guilds.cache.get("863732935035060264");
         const logs = guild.channels.cache.get('864535338977591326');
         const embed = new Discord.MessageEmbed

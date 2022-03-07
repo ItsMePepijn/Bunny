@@ -5,8 +5,8 @@ module.exports = {
     name: 'clear',
     description: 'Mass delete messages',
     isStaff: true,
-    execute(message, args, guild){
-        const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
+    execute(message, args){
+        const logs = message.guild.channels.cache.find(channel => channel.id === '864535338977591326');
         const pfx = db.get('prefix');
         const embed = new Discord.MessageEmbed()
         if(message.member.permissions.has('MANAGE_MESSAGES') || message.member.permissions.has('ADMINISTRATOR')){
@@ -43,7 +43,7 @@ module.exports = {
                         } else{
                             var msg = ('messages')
                         }
-                        embed.setAuthor(`Deleted ${messages} ${msg}!`)
+                        embed.setTitle(`Deleted ${messages} ${msg}!`)
                         embed.setDescription(`**Amount:** ${messages}\n**In:** <#${message.channel.id}>\n**By:** ${message.member}`)
                         embed.setColor("#ECBCD7")
                         embed.setTimestamp()

@@ -5,15 +5,14 @@ module.exports = {
     name: 'kick',
     description: 'Kicks the specified user',
     isStaff: true,
-    execute(message, args, guild){
-        const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
-        const embed = new discord.MessageEmbed
+    execute(message, args){
+        const logs = message.guild.channels.cache.find(channel => channel.id === '864535338977591326');
+        const embed = new discord.MessageEmbed()
         const pfx = db.get('prefix');
         if(message.member.permissions.has('KICK_MEMBERS') || message.member.permissions.has('ADMINISTRATOR')){
-            const user = message.mentions.members.first()
-            const target = message.mentions.users.first()
-            if(user){
-                if(user.permissions.has('BAN_MEMBERS') || user.permissions.has('ADMINISTRATOR') || user.permissions.has('KICK_MEMBERS')){
+            const member = message.mentions.members.first()
+            if(member){
+                if(member.permissions.has('BAN_MEMBERS') || member.permissions.has('ADMINISTRATOR') || member.permissions.has('KICK_MEMBERS')){
                     embed.setTitle('Error')
                     embed.setDescription('I can\'t kick this user!')
                     embed.setColor("#ECBCD7")
@@ -27,12 +26,12 @@ module.exports = {
                     }else{
                         var reason = (args.slice(1).join(' '))
                     }
-                    embed.setAuthor(`${target.tag} has been kicked!`, target.displayAvatarURL())
+                    embed.setTitle(`${member.user.tag} has been kicked!`, member.user.displayAvatarURL())
                     embed.setDescription(`**By:** <@${message.member}>\n**Reason:** ${reason}`)
                     embed.setColor("#ECBCD7")
                     embed.setTimestamp()
-                    user.kick(reason);
-                    console.log(`Kicked ${target.tag} for ${reason}`)
+                    member.kick(reason);
+                    console.log(`Kicked ${member.user.tag} for ${reason}`)
                     message.channel.send({embeds: [embed] });
                     logs.send({embeds: [embed] });
                     console.log('Embed sent');

@@ -7,12 +7,9 @@ module.exports = {
     execute(message){
         const embed = new Discord.MessageEmbed()
         if(!message.mentions.users.first()){
-            var infr = db.get(`member_${message.author.id}.infractions`)
-            if(infr === null){
+            var infractions = db.get(`member_${message.author.id}.infractions`)
+            if(infractions === null){
                 var infractions = 0
-            }
-            else{
-                var infractions = infr
             }
             embed.setTitle(`Your infractions:`)
             embed.setDescription(`${infractions}`)
@@ -23,12 +20,9 @@ module.exports = {
         }
         else{
             const target = message.mentions.users.first();
-            var infr = db.get(`member_${target.id}.infractions`)
-            if(infr === null){
+            var infractions = db.get(`member_${target.id}.infractions`)
+            if(infractions === null){
                 var infractions = 0
-            }
-            else{
-                var infractions = infr
             }
             embed.setTitle(`${target.tag} \'s infractions:`)
             embed.setDescription(`${infractions}`)

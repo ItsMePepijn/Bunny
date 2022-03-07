@@ -6,8 +6,8 @@ module.exports = {
     execute(message, args){
         const embed =  new Discord.MessageEmbed();
         const embed2 = new Discord.MessageEmbed();
-        const suggest = message.guild.channels.cache.get('899637865082937435')
-        if(message.channel.id == '899636638681006080'){
+        const suggest = message.guild.channels.cache.get(db.get('channels.suggestions'))
+        if(message.channel.id == db.get('channels.logs.suggestions')){
             if(!args.length == 0){
                 embed.setTitle('Thank you for making a suggestion!')
                 embed.setDescription('Your suggestion will be reviewed as soon as posssible')

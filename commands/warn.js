@@ -1,13 +1,13 @@
 const Discord = require('discord.js');
 const db =  require('quick.db');
+const client = require('../modules/client')
  
 module.exports = {
     name: 'warn',
     description: 'warns a member',
     isStaff: true,
-    execute(message, args, client){
-        const guild = client.guilds.cache.get("863732935035060264");
-        const warnlogs = guild.channels.cache.get('899603877790367746');
+    execute(message, args){
+        const warnlogs = message.guild.channels.cache.get(db.get('channels.logs.warns'));
         const embed = new Discord.MessageEmbed
         const pfx = db.get('prefix');
         if(message.member.permissions.has('MANAGE_MESSAGES') || message.member.permissions.has('ADMINISTRATOR')){
