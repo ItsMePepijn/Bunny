@@ -2,6 +2,7 @@ const db = require('quick.db');
 const fs = require('fs');
 const Discord = require('discord.js');
 const chalk = require('chalk');
+
 const pfx = db.get('prefix');
 
 const DIF = Discord.Intents.FLAGS
@@ -19,12 +20,15 @@ client.commands = new Discord.Collection();
 const embed = new Discord.MessageEmbed()
 
 //Commands setup
-const commandFiles = fs.readdirSync(__dirname + '/commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
-    const command = require(__dirname + `/commands/${file}`);
-    console.log(chalk.greenBright('[COMMAND HANDLER]') + ' - ' + chalk.blueBright(`${file} has been loaded`));
+    const command = require(`./commands/${file}`);
+	if(command.isDisabled) console.log(chalk.redBright('[COMMAND HANDLER]') + ` - ${file} has been loaded but its disabled!`);
+	else console.log(chalk.green('[COMMAND HANDLER]') + ` - ${file} has been loaded`);
     client.commands.set(command.name, command);
 }
+
+console.log(' ')
 
 const muteloop = client.commands.get('muteloop');
 function muteloopstart(){
@@ -34,12 +38,8 @@ function muteloopstart(){
 //On ready
 client.on('ready', () => {
     console.log(chalk.greenBright(client.user.tag + ' Has logged in!'));
-    status();
-    setInterval(muteloopstart, 10000);
-    setInterval(MemberCount, 300000);
-    setInterval(status, 600000);
     readymessage();
-    
+
 });
 
 //Sends message in logs when bot starts
@@ -68,15 +68,6 @@ client.on('messageCreate', message => {
     const file = client.commands.get(command);
     if(file) file.execute(message, args, client);
 });
-
-//membercount channel
-function MemberCount(){
-    const channel = client.channels.cache.find(channel => channel.id === '863825218349694996');
-    const guild = client.guilds.cache.find(guild => guild.id === "863732935035060264");
-    if (!channel) return;
-    channel.setName(`୨・${guild.memberCount}`);
-}
-
 
 //deleted message logger
 client.on('messageDelete', message => {
@@ -155,9 +146,5 @@ client.on('interactionCreate', interaction => {
         }
     }
 });
-
-function status(){
-    client.user.setPresence({ activities: [{ name: 'all the cuties', type: 'WATCHING' }], status: 'dnd' });
-}
 
 client.login(token);
