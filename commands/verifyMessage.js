@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'verifymessage',
     description: 'sends the verify message',
+    isStaff: true,
     execute(message){
         if(message.member.permissions.has('ADMINISTRATOR')){
             const row = new Discord.MessageActionRow().addComponents(

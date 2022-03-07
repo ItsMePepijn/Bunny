@@ -4,15 +4,15 @@ const db = require('quick.db');
 module.exports = {
     name: 'ban',
     description: 'Bans the specified user',
+    isStaff: true,
     execute(message, args, guild){
-        const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
+        const logs = guild.channels.cache.find(channel => channel.id === db.get('channels.logs.ban'));
         const embed = new discord.MessageEmbed
         const pfx = db.get('prefix');
         if(message.member.permissions.has('BAN_MEMBERS') || message.member.permissions.has('ADMINISTRATOR')){
-            const user = message.mentions.members.first()
-            const target = message.mentions.users.first()
-            if(user){
-                if(user.permissions.has('BAN_MEMBERS') || user.permissions.has('ADMINISTRATOR')){
+            const member = message.mentions.members.first()
+            if(member){
+                if(member.permissions.has('BAN_MEMBERS') || member.permissions.has('ADMINISTRATOR')){
                     embed.setTitle('Error')
                     embed.setDescription('I can\'t ban this user!')
                     embed.setColor("#ECBCD7")
@@ -26,15 +26,15 @@ module.exports = {
                     }else{
                         var banreason = (args.slice(1).join(' '))
                     }
-                    embed.setTitle(`${target.tag} has been banned!`, target.displayAvatarURL())
+                    embed.setTitle(`${member.user.tag} has been banned!`, member.user.displayAvatarURL())
                     embed.setDescription('**Reason:** ' + banreason + '\n**By:** <@' + message.member + '>')
                     embed.setColor("#ECBCD7")
                     embed.setTimestamp()
-                    user.ban({
+                    member.ban({
                         days: 0,
                         reason: banreason
                     });
-                    console.log(`Banned ${target.tag} for ${banreason}`)
+                    console.log(`Banned ${member.user.tag} for ${banreason}`)
                     message.channel.send({embeds: [embed] });
                     logs.send({embeds: [embed] });
                     console.log('Embed sent');

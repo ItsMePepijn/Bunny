@@ -5,6 +5,7 @@ const db = require('quick.db');
 module.exports = {
 	name: 'slowmode',
 	description: 'Will set or remove the slowmode in a channel',
+    isStaff: true,
 	execute(message, args, guild) {
         const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
         const embed = new Discord.MessageEmbed

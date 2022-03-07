@@ -4,6 +4,7 @@ const db = require('quick.db');
 module.exports = {
     name: 'kick',
     description: 'Kicks the specified user',
+    isStaff: true,
     execute(message, args, guild){
         const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
         const embed = new discord.MessageEmbed

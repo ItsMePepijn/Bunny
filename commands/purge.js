@@ -4,6 +4,7 @@ const db = require('quick.db');
 module.exports = {
     name: 'clear',
     description: 'Mass delete messages',
+    isStaff: true,
     execute(message, args, guild){
         const logs = guild.channels.cache.find(channel => channel.id === '864535338977591326');
         const pfx = db.get('prefix');

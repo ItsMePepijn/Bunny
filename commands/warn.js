@@ -4,6 +4,7 @@ const db =  require('quick.db');
 module.exports = {
     name: 'warn',
     description: 'warns a member',
+    isStaff: true,
     execute(message, args, client){
         const guild = client.guilds.cache.get("863732935035060264");
         const warnlogs = guild.channels.cache.get('899603877790367746');
