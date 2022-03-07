@@ -18,7 +18,7 @@ module.exports = {
         
         const args = message.content.slice(pfx.length).trim().split(' ');
 
-        if(message.channel.id == '899636638681006080'){
+        if(message.channel.id == db.get('channels.suggestions')){
             if(message.member.permissions.has('ADMINISTRATOR')) return
             if(args[0] != 'suggest') return message.delete();
         }

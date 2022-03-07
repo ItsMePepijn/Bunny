@@ -5,12 +5,12 @@ module.exports = {
     execute(interaction){
         if(interaction.isButton){
             if(interaction.customId == 'verify'){
-                const memberole = interaction.guild.roles.cache.get('898536580468334602');
-                const verifylogs = interaction.guild.channels.cache.get('898538121908613121');
-                const chat = interaction.guild.channels.cache.get('864532474398507048');
+                const memberole = interaction.guild.roles.cache.get(db.get('roles.member'));
+                const verifylogs = interaction.guild.channels.cache.get(db.get('channels.logs.verify'));
+                const chat = interaction.guild.channels.cache.get(db.get('channels.main'));
                 const embed = new Discord.MessageEmbed();
                 const embed2 = new Discord.MessageEmbed();
-                if(!interaction.member.roles.cache.has('898536580468334602')){
+                if(!interaction.member.roles.cache.has(memberole.id)){
                     interaction.deferUpdate();
                     interaction.member.roles.add(memberole);
                     embed.setTitle(`${interaction.user.tag} has veen verified!`);
