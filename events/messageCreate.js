@@ -8,13 +8,13 @@ module.exports = {
     execute(message){
         if(message.author.bot || !message.guild) return;
 
-        // if(Math.floor(Math.random() * 6) == 1){
-        //     var balance = economy.get(`user_${message.member.id}.balance`)
-        //     if(balance === null) {
-        //         economy.set(`user_${message.member.id}.balance`, 1000)
-        //     }
-        //     economy.add(`user_${message.member.id}.balance`, Math.floor(Math.random() * 16))
-        // }
+        if(Math.floor(Math.random() * 6) == 1){
+            var balance = economy.get(`user_${message.member.id}.balance`)
+            if(balance === null) {
+                economy.set(`user_${message.member.id}.balance`, 1000)
+            }
+            economy.add(`user_${message.member.id}.balance`, Math.floor(Math.random() * 16))
+        }
         
         const args = message.content.slice(pfx.length).trim().split(' ');
 
