@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const db =  require('quick.db');
+var moderation = new db.table('moderation');
  
 module.exports = {
     name: 'warnings',
@@ -7,7 +8,7 @@ module.exports = {
     execute(message){
         const embed = new Discord.MessageEmbed()
         if(!message.mentions.users.first()){
-            var infractions = db.get(`member_${message.author.id}.infractions`)
+            var infractions = moderation.get(`member_${message.author.id}.infractions`)
             if(infractions === null){
                 var infractions = 0
             }
@@ -20,7 +21,7 @@ module.exports = {
         }
         else{
             const target = message.mentions.users.first();
-            var infractions = db.get(`member_${target.id}.infractions`)
+            var infractions = moderation.get(`member_${target.id}.infractions`)
             if(infractions === null){
                 var infractions = 0
             }

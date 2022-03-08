@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const db =  require('quick.db');
 const client = require('../modules/client')
+var moderation = new db.table('moderation');
  
 module.exports = {
     name: 'setwarnings',
@@ -34,9 +35,9 @@ module.exports = {
                     embed.setDescription(`**By:** ${message.member}\n**Reason:** ${warnreason}`)
                     embed.setColor("#ECBCD7")
                     embed.setTimestamp()
-                    db.set(`member_${target.id}.infractions`, parseInt(warns));
+                    moderation.set(`member_${target.id}.infractions`, parseInt(warns));
                     console.log(`${target.tag}\'s warns have been edited`)
-                    console.log(`${target.tag} now has ${db.get(`member_${target.id}.infractions`)} infractions`)
+                    console.log(`${target.tag} now has ${moderation.get(`member_${target.id}.infractions`)} infractions`)
                     message.channel.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
