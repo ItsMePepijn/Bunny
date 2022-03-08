@@ -11,7 +11,7 @@ module.exports = {
             if(message.author.bot) return
             if(message.channel.id == db.get('channels.verify')) return
             if(message.channel.id == db.get('channels.suggestions')) return
-            const logs = client.channels.cache.find(channel => channel.id === db.get('channels.logs.message'));
+            const logs = client.channels.cache.get(db.get('channels.logs.message'));
             embed.setTitle('Deleted message:')
             embed.setDescription(`**Messsage:** ${message.content}\n**Sent by:** ${message.author}\n**In:** <#${message.channel.id}>`)
             embed.setColor('#ECBCD7')
