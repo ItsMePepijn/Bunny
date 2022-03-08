@@ -7,7 +7,7 @@ module.exports = {
 	description: 'Will set or remove the slowmode in a channel',
     isStaff: true,
 	execute(message, args) {
-        const logs = message.guild.channels.cache.find(channel => channel.id === '864535338977591326');
+        const logs = message.guild.channels.cache.get(db.get('channels.logs.slowmode'));
         const embed = new Discord.MessageEmbed()
         embed.setColor(db.get('embedColor'))
         embed.setTimestamp()

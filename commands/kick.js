@@ -6,7 +6,7 @@ module.exports = {
     description: 'Kicks the specified user',
     isStaff: true,
     execute(message, args){
-        const logs = message.guild.channels.cache.find(channel => channel.id === '864535338977591326');
+        const logs = message.guild.channels.cache.get(db.get('channels.logs.kick'));
         const embed = new discord.MessageEmbed()
         embed.setColor(db.get('embedColor'))
         embed.setTimestamp()

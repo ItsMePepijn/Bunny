@@ -6,7 +6,7 @@ module.exports = {
     description: 'Bans the specified user',
     isStaff: true,
     execute(message, args){
-        const logs = message.guild.channels.cache.find(channel => channel.id === db.get('channels.logs.ban'));
+        const logs = message.guild.channels.cache.get(db.get('channels.logs.ban'));
         const embed = new discord.MessageEmbed()
         embed.setColor(db.get('embedColor'))
         embed.setTimestamp()

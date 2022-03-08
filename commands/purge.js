@@ -6,7 +6,7 @@ module.exports = {
     description: 'Mass delete messages',
     isStaff: true,
     execute(message, args){
-        const logs = message.guild.channels.cache.find(channel => channel.id === '864535338977591326');
+        const logs = message.guild.channels.cache.get(db.get('channels.logs.purge'));
         const pfx = db.get('prefix');
         const embed = new Discord.MessageEmbed()
         embed.setColor(db.get('embedColor'))

@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const db =  require('quick.db');
-const client = require('../modules/client')
 var moderation = new db.table('moderation');
  
 module.exports = {
@@ -8,8 +7,7 @@ module.exports = {
     description: 'set the warns of a member',
     isStaff: true,
     execute(message, args){
-        const guild = client.guilds.cache.get("863732935035060264");
-        const logs = guild.channels.cache.get('864535338977591326');
+        const logs = guild.channels.cache.get(db.get('channels.logs.warns'));
         const embed = new Discord.MessageEmbed
         embed.setColor(db.get('embedColor'))
         embed.setTimestamp()
@@ -37,6 +35,7 @@ module.exports = {
                     console.log(`${target.tag}\'s warns have been edited`)
                     console.log(`${target.tag} now has ${moderation.get(`member_${target.id}.infractions`)} infractions`)
                     message.channel.send({embeds: [embed] });
+                    logs.send({embeds: [embed] })
                     console.log('Embed sent');
                 }
             }
