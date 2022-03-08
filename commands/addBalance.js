@@ -6,6 +6,7 @@ var economy = new db.table('economy');
 module.exports = {
     name: 'addbalance',
     description: 'adds money to a user\'s balance',
+    isStaff: true,
     execute(message, args){
 
         const embed = new Discord.MessageEmbed();
