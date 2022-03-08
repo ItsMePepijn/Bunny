@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const db = require('quick.db')
  
 module.exports = {
     name: 'av',
@@ -9,7 +10,7 @@ module.exports = {
         if(!message.mentions.users.first()){
             embed.setTitle("Your Avatar:")
             embed.setImage(message.author.displayAvatarURL({ format: "png", dynamic: true }))
-            embed.setColor("#ECBCD7")
+            embed.setColor(db.get('embedColor'))
             embed.setTimestamp()
             message.channel.send({embeds: [embed] });
             console.log('Embed sent');

@@ -8,6 +8,8 @@ module.exports = {
     execute(message, args){
         const logs = message.guild.channels.cache.find(channel => channel.id === '864535338977591326');
         const embed = new discord.MessageEmbed()
+        embed.setColor(db.get('embedColor'))
+        embed.setTimestamp()
         const pfx = db.get('prefix');
         if(message.member.permissions.has('KICK_MEMBERS') || message.member.permissions.has('ADMINISTRATOR')){
             const member = message.mentions.members.first()
@@ -15,8 +17,6 @@ module.exports = {
                 if(member.permissions.has('BAN_MEMBERS') || member.permissions.has('ADMINISTRATOR') || member.permissions.has('KICK_MEMBERS')){
                     embed.setTitle('Error')
                     embed.setDescription('I can\'t kick this user!')
-                    embed.setColor("#ECBCD7")
-                    embed.setTimestamp()
                     message.channel.send({embeds: [embed] });
                     console.log('Embed sent');
                 }
@@ -28,8 +28,6 @@ module.exports = {
                     }
                     embed.setTitle(`${member.user.tag} has been kicked!`, member.user.displayAvatarURL())
                     embed.setDescription(`**By:** <@${message.member}>\n**Reason:** ${reason}`)
-                    embed.setColor("#ECBCD7")
-                    embed.setTimestamp()
                     member.kick(reason);
                     console.log(`Kicked ${member.user.tag} for ${reason}`)
                     message.channel.send({embeds: [embed] });
@@ -39,8 +37,6 @@ module.exports = {
             } else{
                 embed.setTitle(`Command: ${pfx}kick`)
                 embed.setDescription(`**Description:** Kick a member\n**Usage:** ${pfx}kick [user] [reason]\n**Example:** ${pfx}kick noobmaster69  not cool`)
-                embed.setColor("#ECBCD7")
-                embed.setTimestamp()
                 message.channel.send({embeds: [embed] });
                 console.log('Embed sent');    
             }
@@ -48,8 +44,6 @@ module.exports = {
         else {
             embed.setTitle('Error')
             embed.setDescription('You do not have the required permissions!')
-            embed.setColor("#ECBCD7")
-            embed.setTimestamp()
             message.channel.send({embeds: [embed] });
             console.log('Embed sent');
         }

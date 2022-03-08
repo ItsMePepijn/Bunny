@@ -7,6 +7,8 @@ module.exports = {
     description: 'returns the amount of warnings a user has',
     execute(message){
         const embed = new Discord.MessageEmbed()
+        embed.setColor(db.get('embedColor'))
+        embed.setTimestamp()
         if(!message.mentions.users.first()){
             var infractions = moderation.get(`member_${message.author.id}.infractions`)
             if(infractions === null){
@@ -14,8 +16,6 @@ module.exports = {
             }
             embed.setTitle(`Your infractions:`)
             embed.setDescription(`${infractions}`)
-            embed.setColor("#ECBCD7")
-            embed.setTimestamp()
             message.channel.send({embeds: [embed] });
             console.log('Embed sent');
         }
@@ -27,8 +27,6 @@ module.exports = {
             }
             embed.setTitle(`${target.tag} \'s infractions:`)
             embed.setDescription(`${infractions}`)
-            embed.setColor("#ECBCD7")
-            embed.setTimestamp()
             message.channel.send({embeds: [embed] });
             console.log('Embed sent');
         }
