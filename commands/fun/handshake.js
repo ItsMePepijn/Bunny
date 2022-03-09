@@ -3,20 +3,20 @@ const Discord = require('discord.js');
 const db = require('quick.db')
 
 module.exports = {
-	name: 'kiss',
-	description: 'Send a random kiss',
+	name: 'handshake',
+	description: 'Send a random handshake',
 	execute(message) {
         const embed = new Discord.MessageEmbed()
         embed.setColor(db.get('embedColor'))
         embed.setTimestamp()
-        const {tenorkey} = require('../config.json')
+        const {tenorkey} = require('../../config.json')
 		axios
-		.get(`https://g.tenor.com/v1/random?key=${tenorkey}&q=anime%20kiss&locale=en_US&contentfilter=medium&media_filter=minimal&ar_range=wide&limit=1`)
+		.get(`https://g.tenor.com/v1/random?key=${tenorkey}&q=anime%20handshake&locale=en_US&contentfilter=medium&media_filter=minimal&ar_range=wide&limit=1`)
 		.then((res) => {
             if(!message.mentions.users.first()){
-                embed.setTitle("You kissed yourself");
+                embed.setTitle("You shook hands with yourself");
             }else{
-                embed.setTitle(`You kissed ${message.mentions.users.first().tag}`)
+                embed.setTitle(`You shook hands with ${message.mentions.users.first().tag}`)
             }
 			embed.setImage(res.data.results[0].media[0].gif.url)
 			message.channel.send({embeds: [embed] });

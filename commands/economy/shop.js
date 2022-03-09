@@ -1,5 +1,5 @@
-const Shop = require('../modules/shopInterface/shopInterface')
-const {itemButtonAction} = require('../modules/shopInterface/itemButtonAction')
+const Shop = require('../../modules/shopInterface/shopInterface')
+const {itemButtonAction} = require('../../modules/shopInterface/itemButtonAction')
 const db = require('quick.db');
 var shop = new db.table('shop')
 

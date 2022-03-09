@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 const db = require('quick.db');
 const prefix = db.get('prefix');
-const Help = require('../modules/helpInterface/helpInterface')
-const {itemButtonAction} = require('../modules/helpInterface/itemButtonAction')
+const Help = require('../../modules/helpInterface/helpInterface')
+const {itemButtonAction} = require('../../modules/helpInterface/itemButtonAction')
 
 
 module.exports = {
