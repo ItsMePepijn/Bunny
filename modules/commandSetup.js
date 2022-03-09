@@ -27,6 +27,7 @@ function setCommands(){
         }
         else return
     }
+    console.log(' ')
 }
 
 module.exports = {
