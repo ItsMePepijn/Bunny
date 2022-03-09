@@ -1,36 +1,12 @@
-//Importing libraries
-const fs = require('fs');
-const Discord = require('discord.js');
-const chalk = require('chalk');
-
-//Client setup
 const {client} = require('./modules/client')
-client.commands = new Discord.Collection();
 
 //Commands setup
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-	if(command.isDisabled) console.log(chalk.redBright('[COMMAND HANDLER]') + ` - ${file} has been loaded but its disabled!`);
-	else console.log(chalk.green('[COMMAND HANDLER]') + ` - ${file} has been loaded`);
-    client.commands.set(command.name, command);
-}
-
-console.log(' ')
+const {setCommands} = require('./modules/commandSetup')
+setCommands()
 
 //Events setup
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
-    console.log(chalk.green('[EVENT HANDLER]') + ` - ${file} has been loaded`);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args));
-	}
-}
+const {setEvents} = require('./modules/eventSetup')
+setEvents()
 
-console.log(' ')
-
-const {token} = require(__dirname + '/config.json');
+const {token} = require('./config.json');
 client.login(token);
